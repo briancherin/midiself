@@ -168,9 +168,6 @@ public class MergeTest {
 				if (finalFile.createNewFile()){
 					System.out.println("file " + finalFile + " created.");
 				}
-				else{
-					System.out.println("file " + finalFile + " already exists!");
-				}
 	
 				mixer.mixAudioFiles(audioFileList, finalFile);
 				
@@ -197,7 +194,7 @@ public class MergeTest {
 					audioFileList.add(file);
 				}			
 				
-				String filename = "finalAudio" + numbSets + ".wav";
+				String filename = "tempAudio/finalAudio" + numbSets + ".wav";
 					
 				File finalFile = new File(filename);
 
