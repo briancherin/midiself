@@ -18,6 +18,7 @@ public class AudioMixer {
 
         for (File file : files) {
             if (!file.exists()) {
+                System.out.println("Files don't exist.");
   //              SkypeRec.LOGGER.severe("Could not mix audio files: One of the recordings unavailable: " + file.getAbsolutePath());
                 return;
             }
