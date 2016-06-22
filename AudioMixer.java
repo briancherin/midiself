@@ -18,6 +18,7 @@ public class AudioMixer {
 
         for (File file : files) {
             if (!file.exists()) {
+                System.out.println("Can't find file " + file);
   //              SkypeRec.LOGGER.severe("Could not mix audio files: One of the recordings unavailable: " + file.getAbsolutePath());
                 return;
             }
@@ -98,6 +99,8 @@ public class AudioMixer {
 		audioFileList.add(file10);
 		audioFileList.add(file11);
 		audioFileList.add(file12);
+
+        System.out.println(audioFileList);
 		
 		mixAudioFiles(audioFileList, finalFile);
     }

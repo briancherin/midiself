@@ -164,6 +164,13 @@ public class MergeTest {
 					
 				String filename = "finalAudio" + numbSets + ".wav";
 				File finalFile = new File(filename);
+
+				if (finalFile.createNewFile()){
+					System.out.println("file " + finalFile + " created.");
+				}
+				else{
+					System.out.println("file " + finalFile + " already exists!");
+				}
 	
 				mixer.mixAudioFiles(audioFileList, finalFile);
 				
@@ -179,7 +186,6 @@ public class MergeTest {
 				i++;						//skip the off signal note
 				
 				
-				AudioMixer mixer = new AudioMixer();
 				
 				tempNotes = new ArrayList<String>(new LinkedHashSet<String>(tempNotes));	//remove duplicate notes 
 				System.out.println(tempNotes);		//MERGE AUDIOS HERE (below actually)
@@ -187,14 +193,22 @@ public class MergeTest {
 				Collection<File> audioFileList = new ArrayList<File>();
 		
 				for (int k = 0; k < tempNotes.size(); k++){
-					File file = new File("/notes" + tempNotes.get(k) + ".wav");
+					File file = new File("notes/" + tempNotes.get(k) + ".wav");
 					audioFileList.add(file);
 				}			
 				
 				String filename = "finalAudio" + numbSets + ".wav";
 					
 				File finalFile = new File(filename);
+
+				if (finalFile.createNewFile()){
+					System.out.println("file " + finalFile + " created.");
+				}
+				else{
+					System.out.println("file " + finalFile + " already exists!");
+				}
 		
+				AudioMixer mixer = new AudioMixer();
 		
 				mixer.mixAudioFiles(audioFileList, finalFile);
 				
