@@ -156,7 +156,7 @@ public class MixingAudioInputStream
 	}
 	
 	public static void main (String[]args){
-	//	read();
+		read();
 	}
 
 
@@ -1373,6 +1373,6 @@ public class MixingAudioInputStream
 }
 
 
-
+*/
 /*** MixingAudioInputStream.java ***/
 

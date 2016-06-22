@@ -133,7 +133,7 @@ public class MergeTest {
 						
 		for (int i = 0; i < notes.size(); i++){
 			if ((i+1 < notes.size()) && notes.get(i) != notes.get(i+1))	{	//more than one note at the same time
-				System.out.println("Inside if: more than one note at same time.");
+			System.out.println("Inside if: more than one note at same time.");
 			//	System.out.print(notes.get(i));
 				tempNotes.add(notes.get(i));	//add original note to list
 				for (int j = i+1; j < notes.size(); j++){
@@ -147,7 +147,7 @@ public class MergeTest {
 						numbSets++;
 					}
 				}
-				System.out.println("Outside for loop: tempNotes = " + tempNotes);
+			System.out.println("Outside for loop: tempNotes = " + tempNotes);
 				
 				AudioMixer mixer = new AudioMixer();
 				
@@ -164,7 +164,6 @@ public class MergeTest {
 					
 				String filename = "finalAudio" + numbSets + ".wav";
 				File finalFile = new File(filename);
-//				System.out.println("Filmlfknjbbhjnkmlnjkbhvhbjkljbkhvjb,nm.kkjhbkvjb,nkjlihbkje: " + finalFile);
 	
 				mixer.mixAudioFiles(audioFileList, finalFile);
 				
@@ -179,7 +178,6 @@ public class MergeTest {
 				tempNotes.add(notes.get(i));	//add that note to note list
 				i++;						//skip the off signal note
 				
-			//	System.out.println("Inside second if");
 				
 				AudioMixer mixer = new AudioMixer();
 				
@@ -207,9 +205,11 @@ public class MergeTest {
 				audioFileList.clear();
 				
 				numbSets++;
+				
 			
 			}
 		}
+		
 		midi catDoer = new midi();
 		
 	//	System.out.println(finalAudioList);

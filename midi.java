@@ -37,14 +37,9 @@ public class midi {
 			AudioFormat audioFormat = null;
 			Long frameLength = null;
 
-			for(String sourceFile : sourceFilesList){
-				System.out.println(sourceFile);
-			}
-
 			try {
 				// loop through our files first and load them up
 				for (String sourceFile : sourceFilesList) {
-					System.out.println("sourceFile = " + sourceFile);
 					audioInputStream = AudioSystem.getAudioInputStream(new File(sourceFile));
 
 					// get the format of first file
@@ -100,7 +95,7 @@ public class midi {
 		//ArrayList notesInSong = new ArrayList();
 		List<String> notesInSong = new ArrayList<String>();
 	
-		Sequence sequence = MidiSystem.getSequence(new File("songs/up.mid"));
+		Sequence sequence = MidiSystem.getSequence(new File("up.mid"));
 		
 		int trackNumber = 0;
 		for (Track track : sequence.getTracks()) {
@@ -121,7 +116,7 @@ public class midi {
 						String noteName = NOTE_NAMES[note];
 						int velocity = sm.getData2();
 	//					System.out.println("Note on, " + noteName + octave + " key = " + key + " velocity: " + velocity);
-						notesInSong.add("notes/" + noteName + ".wav");			///ADD TO LIST OF NOTES
+						notesInSong.add(noteName + ".wav");			///ADD TO LIST OF NOTES
 					//	System.out.println(notesInSong);
 					} else if (sm.getCommand() == NOTE_OFF) {
 						int key = sm.getData1();
@@ -149,7 +144,7 @@ public class midi {
 		List<String> sourceFilesList = new ArrayList<String>();
 		
 		for (int i = 0; i < testList.length; i++){
-			sourceFilesList.add("notes/" + testList[i] + ".wav");
+			sourceFilesList.add(testList[i] + ".wav");
 		}
 		
 		System.out.println(notesInSong);
