@@ -40,6 +40,8 @@ public class MergeTest {
 	public static List<String> getNotes(String midiFileName) throws Exception {
 		
 		List<String> notesInSong = new ArrayList<String>();
+
+		List<Note> noteList = new ArrayList<Note>();
 	
 		Sequence sequence = MidiSystem.getSequence(new File(midiFileName));
 		
@@ -55,6 +57,14 @@ public class MergeTest {
 				if (message instanceof ShortMessage){
 					ShortMessage sm = (ShortMessage) message;
 //					System.out.println("Channel: " + sm.getChannel() + " ");
+
+
+					noteList.add(new Note(sm.getData1(), sm.getData2(), sm.getCommand()));
+
+
+
+/*
+
 					if (sm.getCommand() == NOTE_ON) {
 						int key = sm.getData1();
 						int octave = (key / 12)-1;
@@ -63,7 +73,7 @@ public class MergeTest {
 						int velocity = sm.getData2();
 					//	System.out.println("Note on, " + noteName + octave + " key = " + key + " velocity: " + velocity);
 					//	notesInSong.add(noteName + ".wav");			///ADD TO LIST OF NOTES
-						notesInSong.add(noteName);
+						notesInSong.add(noteName + octave);
 					//	System.out.println(notesInSong);
 					} else if (sm.getCommand() == NOTE_OFF) {
 						int key = sm.getData1();
@@ -72,6 +82,7 @@ public class MergeTest {
 						String noteName = NOTE_NAMES[note];
 						int velocity = sm.getData2();
 	//					System.out.println("Note off, " + noteName + octave + " key = " + key + " velocity: " + velocity);
+
 					} else {
 	//					System.out.println("Command: " + sm.getCommand());
 					}
@@ -81,6 +92,7 @@ public class MergeTest {
 			}
 	//		System.out.println();
 		}
+*/
 		
 	//	System.out.println("Notes in song: " + notesInSong);
 	
@@ -114,16 +126,18 @@ public class MergeTest {
 							"F", 
 						"C#"};
 
-	//	String[] noteArray = {"E", "E", "G", "G", "E", "E", "C", "C", "D", "D", "G", "G"};
+		String[] noteArray = {"A", "A", "B", "B", "C",  "C",  "D",  "D", "E", "E"};
 		
 		List<String> notes = new ArrayList<String>();
 		
-		notes = getNotes("songs/Sm1cave.mid");
+		notes = getNotes("songs/up.mid");
 	
 	//	notes.clear();
-//		Collections.addAll(notes, randomNotes); //add all elements of array to the arraylist
+	//	Collections.addAll(notes, noteArray); //add all elements of array to the arraylist
 		
 		System.out.println(notes);
+
+		//notes = [E6, E6, G6, G6, E7, E7, C7, C7, D7, D7, G7, G7]	
 						
 		List<String> tempNotes = new ArrayList<String>();
 		
@@ -133,7 +147,7 @@ public class MergeTest {
 						
 		for (int i = 0; i < notes.size(); i++){
 			if ((i+1 < notes.size()) && notes.get(i) != notes.get(i+1))	{	//more than one note at the same time
-			System.out.println("Inside if: more than one note at same time.");
+				System.out.println("Inside if: more than one note at same time.");
 			//	System.out.print(notes.get(i));
 				tempNotes.add(notes.get(i));	//add original note to list
 				for (int j = i+1; j < notes.size(); j++){
@@ -147,7 +161,7 @@ public class MergeTest {
 						numbSets++;
 					}
 				}
-			System.out.println("Outside for loop: tempNotes = " + tempNotes);
+				System.out.println("Outside for loop: tempNotes = " + tempNotes);
 				
 				AudioMixer mixer = new AudioMixer();
 				
@@ -157,20 +171,29 @@ public class MergeTest {
 				Collection<File> audioFileList = new ArrayList<File>();
 		
 				for (int k = 0; k < tempNotes.size(); k++){
-					File file = new File("/notes" + tempNotes.get(k) + ".wav");
+					String filename = tempNotes.get(k).substring(0, tempNotes.get(k).length()-1);
+					File file = new File("notes/" + filename + ".wav");
 					audioFileList.add(file);
 				}				
+
+				System.out.println("Created audioFileList.");
 					
 					
-				String filename = "finalAudio" + numbSets + ".wav";
+				String filename = "tempAudio/finalAudio" + numbSets + ".wav";
 				File finalFile = new File(filename);
 
 				if (finalFile.createNewFile()){
 					System.out.println("file " + finalFile + " created.");
 				}
 	
+				System.out.println("About to mix audio files.");
+
+
 				mixer.mixAudioFiles(audioFileList, finalFile);
-				
+
+				System.out.println("after mixer mixAudioFIles");
+
+
 				finalAudioList.add(filename);
 				
 				
@@ -190,7 +213,9 @@ public class MergeTest {
 				Collection<File> audioFileList = new ArrayList<File>();
 		
 				for (int k = 0; k < tempNotes.size(); k++){
-					File file = new File("notes/" + tempNotes.get(k) + ".wav");
+				//	File file = new File("notes/" + tempNotes.get(k) + ".wav");
+					String filename = tempNotes.get(k).substring(0, tempNotes.get(k).length()-1);
+					File file = new File("notes/" + filename + ".wav");
 					audioFileList.add(file);
 				}			
 				
@@ -206,6 +231,7 @@ public class MergeTest {
 				}
 		
 				AudioMixer mixer = new AudioMixer();
+				System.out.println("AudioMixer created.");
 		
 				mixer.mixAudioFiles(audioFileList, finalFile);
 				

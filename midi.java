@@ -95,7 +95,7 @@ public class midi {
 		//ArrayList notesInSong = new ArrayList();
 		List<String> notesInSong = new ArrayList<String>();
 	
-		Sequence sequence = MidiSystem.getSequence(new File("up.mid"));
+		Sequence sequence = MidiSystem.getSequence(new File("songs/overworld.mid"));
 		
 		int trackNumber = 0;
 		for (Track track : sequence.getTracks()) {
@@ -115,7 +115,7 @@ public class midi {
 						int note = key % 12;
 						String noteName = NOTE_NAMES[note];
 						int velocity = sm.getData2();
-	//					System.out.println("Note on, " + noteName + octave + " key = " + key + " velocity: " + velocity);
+						System.out.println("Note on, " + noteName + octave + " key = " + key + " velocity: " + velocity);
 						notesInSong.add(noteName + ".wav");			///ADD TO LIST OF NOTES
 					//	System.out.println(notesInSong);
 					} else if (sm.getCommand() == NOTE_OFF) {
@@ -124,7 +124,7 @@ public class midi {
 						int note = key % 12;
 						String noteName = NOTE_NAMES[note];
 						int velocity = sm.getData2();
-	//					System.out.println("Note off, " + noteName + octave + " key = " + key + " velocity: " + velocity);
+						System.out.println("Note off, " + noteName + octave + " key = " + key + " velocity: " + velocity);
 					} else {
 	//					System.out.println("Command: " + sm.getCommand());
 					}
@@ -147,9 +147,9 @@ public class midi {
 			sourceFilesList.add(testList[i] + ".wav");
 		}
 		
-		System.out.println(notesInSong);
+	//	System.out.println(notesInSong);
 		
-		System.out.println(concatenateFiles(notesInSong, "mergedSounds.mp3"));
+	//	System.out.println(concatenateFiles(notesInSong, "mergedSounds.mp3"));
 		
 	}
 }
